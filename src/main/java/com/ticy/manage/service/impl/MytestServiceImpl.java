@@ -1,11 +1,9 @@
 package com.ticy.manage.service.impl;
 
-import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.ChannelSftp;
-import com.jcraft.jsch.JSch;
-import com.jcraft.jsch.Session;
-import com.ticy.manage.model.Result;
+import com.ticy.manage.entity.UserInfo;
 import com.ticy.manage.service.MytestService;
+import com.ticy.manage.service.ShardingSphereTestService;
 import com.ticy.manage.utils.FTPUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -14,7 +12,6 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Properties;
 
 /**
  * @Author tkk
