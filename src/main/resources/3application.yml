@@ -1,0 +1,51 @@
+backgroundProcessorDelay: '30 # secs'
+basedir: ''
+mybatis:
+    mapper-locations: classpath:mapping/*.xml
+protocolHeader: x-forwarded-proto
+remoteIpHeader: x-forwarded-for
+server:
+    port: 28081
+spring:
+    mvc:
+        view:
+            prefix: /
+            suffix: .html
+    servlet:
+        multipart:
+            max-file-size: 10MB
+            max-request-size: 100MB
+    shardingsphere:
+        datasource:
+            ds:
+                driver-class-name: org.postgresql.Driver
+                max-total: 100
+                password: 123456
+                type: org.apache.commons.dbcp2.BasicDataSource
+                url: jdbc:postgresql://localhost:5432/mytest
+                username: postgres
+            name: ds
+        encrypt:
+            encryptors:
+                encryptor_aes:
+                    props:
+                        aes:
+                            key:
+                                value: 123456
+                    type: aes
+            tables:
+                user_info:
+                    columns:
+                        idcard:
+                            cipherColumn: idcard
+                            encryptor: encryptor_aes
+                            plainColumn: icd
+        props:
+            query:
+                with:
+                    cipher:
+                        column: true
+            sql:
+                show: true
+tomcat: ''
+uri-encoding: UTF-8

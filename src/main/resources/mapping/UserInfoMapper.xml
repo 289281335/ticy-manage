@@ -53,7 +53,18 @@
   </insert>
 
   <select id="getUserInfo" parameterType="java.lang.String" resultType="com.ticy.manage.entity.UserInfo">
-    SELECT * FROM user_info WHERE id = #{id,jdbcType=VARCHAR}
+    SELECT id, username,idcard, password,age FROM user_info WHERE id = #{id,jdbcType=VARCHAR}
 
   </select>
+
+
+  <select id="getMenuByPid" parameterType="java.lang.String" resultType="com.ticy.manage.recursion.Menu">
+    SELECT parent_id as parentId , id, name,description FROM test_tree
+    WHERE 1=1
+    <if test="parentId != null and parentId !=''">
+      and parent_id = #{parentId,jdbcType=VARCHAR}
+    </if>
+  </select>
+
+
 </mapper>

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tiantu.data.server.pushquery.dao.ImagePushRecordMapper">
+  <resultMap id="BaseResultMap" type="com.tiantu.data.server.pushquery.entity.ImagePushRecord">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="batch_id" jdbcType="VARCHAR" property="batchId" />
+    <result column="site_id" jdbcType="VARCHAR" property="siteId" />
+    <result column="image_id" jdbcType="VARCHAR" property="imageId" />
+    <result column="push_path" jdbcType="VARCHAR" property="pushPath" />
+    <result column="store_path" jdbcType="VARCHAR" property="storePath" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="result" jdbcType="VARCHAR" property="result" />
+    <result column="try_count" jdbcType="INTEGER" property="tryCount" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, batch_id, site_id, image_id, push_path, store_path, start_time, end_time, status, 
+    result, try_count
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from image_push_record
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from image_push_record
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.tiantu.data.server.pushquery.entity.ImagePushRecord">
+    insert into image_push_record (id, batch_id, site_id, 
+      image_id, push_path, store_path, 
+      start_time, end_time, status, 
+      result, try_count)
+    values (#{id,jdbcType=VARCHAR}, #{batchId,jdbcType=VARCHAR}, #{siteId,jdbcType=VARCHAR}, 
+      #{imageId,jdbcType=VARCHAR}, #{pushPath,jdbcType=VARCHAR}, #{storePath,jdbcType=VARCHAR}, 
+      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
+      #{result,jdbcType=VARCHAR}, #{tryCount,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tiantu.data.server.pushquery.entity.ImagePushRecord">
+    insert into image_push_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="batchId != null">
+        batch_id,
+      </if>
+      <if test="siteId != null">
+        site_id,
+      </if>
+      <if test="imageId != null">
+        image_id,
+      </if>
+      <if test="pushPath != null">
+        push_path,
+      </if>
+      <if test="storePath != null">
+        store_path,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="endTime != null">
+        end_time,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="result != null">
+        result,
+      </if>
+      <if test="tryCount != null">
+        try_count,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="batchId != null">
+        #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="siteId != null">
+        #{siteId,jdbcType=VARCHAR},
+      </if>
+      <if test="imageId != null">
+        #{imageId,jdbcType=VARCHAR},
+      </if>
+      <if test="pushPath != null">
+        #{pushPath,jdbcType=VARCHAR},
+      </if>
+      <if test="storePath != null">
+        #{storePath,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="result != null">
+        #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="tryCount != null">
+        #{tryCount,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tiantu.data.server.pushquery.entity.ImagePushRecord">
+    update image_push_record
+    <set>
+      <if test="batchId != null">
+        batch_id = #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="siteId != null">
+        site_id = #{siteId,jdbcType=VARCHAR},
+      </if>
+      <if test="imageId != null">
+        image_id = #{imageId,jdbcType=VARCHAR},
+      </if>
+      <if test="pushPath != null">
+        push_path = #{pushPath,jdbcType=VARCHAR},
+      </if>
+      <if test="storePath != null">
+        store_path = #{storePath,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="result != null">
+        result = #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="tryCount != null">
+        try_count = #{tryCount,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tiantu.data.server.pushquery.entity.ImagePushRecord">
+    update image_push_record
+    set batch_id = #{batchId,jdbcType=VARCHAR},
+      site_id = #{siteId,jdbcType=VARCHAR},
+      image_id = #{imageId,jdbcType=VARCHAR},
+      push_path = #{pushPath,jdbcType=VARCHAR},
+      store_path = #{storePath,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      result = #{result,jdbcType=VARCHAR},
+      try_count = #{tryCount,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

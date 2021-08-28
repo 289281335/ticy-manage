@@ -1,0 +1,57 @@
+# 2application.yaml
+server:
+  port: 9099
+  address: 0.0.0.0
+  contextPath: /
+
+  # Tomcat specifics
+  tomcat:
+    uri-encoding: UTF-8
+    protocolHeader: x-forwarded-proto
+    remoteIpHeader: x-forwarded-for
+    basedir:
+    backgroundProcessorDelay: 30 # secs
+
+# Spring Configuration
+#spring:
+  # MySQL Connect config
+  #datasource:
+    #type: org.apache.commons.dbcp.BasicDataSource
+    #driver-class-name: org.postgresql.Driver
+    #url: jdbc:postgresql://localhost:5432/mytest
+    #username: postgres
+   # password: 123456
+  #application:
+   # name: manage
+
+
+
+spring:
+  shardingsphere:
+    dataSource:
+      name: ds
+      ds:
+        type: org.apache.commons.dbcp2.BasicDataSource
+        driverClassName: org.postgresql.Driver
+        url: jdbc:postgresql://localhost:5432/mytest
+        username: postgres
+        password: 123456
+    props:
+      sql.show: true
+      query.with.cipher.column: true #是否使用密文列查询
+    encrypt:
+      encryptors:
+        encryptor_aes:
+          type: aes
+          props:
+            aes.key.value: 123456abcd
+      tables:
+        user_info:
+          columns:
+            idcard:
+              plainColumn: icd
+              cipherColumn: idcard
+              encryptor: encryptor_aes
+
+mybatis:
+  mapper-locations: classpath:mapping/*.xml

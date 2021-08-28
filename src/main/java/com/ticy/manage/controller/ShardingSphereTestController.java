@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ShardingSphereTestController {
 
-    @Autowired
+    //@Autowired
     private ShardingSphereTestService shardingSphereTestService;
 
     @RequestMapping("/userinfo")

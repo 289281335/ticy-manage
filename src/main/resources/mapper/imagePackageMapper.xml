@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tiantu.data.server.pushquery.dao.imagePackageMapper">
+  <resultMap id="BaseResultMap" type="com.tiantu.data.server.pushquery.entity.imagePackage">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="batch_id" jdbcType="VARCHAR" property="batchId" />
+    <result column="satellite_abbr" jdbcType="VARCHAR" property="satelliteAbbr" />
+    <result column="sensor_abbr" jdbcType="VARCHAR" property="sensorAbbr" />
+    <result column="file_name" jdbcType="VARCHAR" property="fileName" />
+    <result column="origin_path" jdbcType="VARCHAR" property="originPath" />
+    <result column="store_path" jdbcType="VARCHAR" property="storePath" />
+    <result column="outline_path" jdbcType="VARCHAR" property="outlinePath" />
+    <result column="store_space" jdbcType="DOUBLE" property="storeSpace" />
+    <result column="receive_time" jdbcType="TIMESTAMP" property="receiveTime" />
+    <result column="x_top_left" jdbcType="DOUBLE" property="xTopLeft" />
+    <result column="y_top_left" jdbcType="DOUBLE" property="yTopLeft" />
+    <result column="x_top_right" jdbcType="DOUBLE" property="xTopRight" />
+    <result column="y_top_right" jdbcType="DOUBLE" property="yTopRight" />
+    <result column="x_bottom_right" jdbcType="DOUBLE" property="xBottomRight" />
+    <result column="y_bottom_right" jdbcType="DOUBLE" property="yBottomRight" />
+    <result column="x_bottom_left" jdbcType="DOUBLE" property="xBottomLeft" />
+    <result column="y_bottom_left" jdbcType="DOUBLE" property="yBottomLeft" />
+    <result column="geom" jdbcType="OTHER" property="geom" />
+    <result column="cloud" jdbcType="REAL" property="cloud" />
+    <result column="resolution_max" jdbcType="REAL" property="resolutionMax" />
+    <result column="orbit_num" jdbcType="INTEGER" property="orbitNum" />
+    <result column="scene_path" jdbcType="INTEGER" property="scenePath" />
+    <result column="scene_row" jdbcType="INTEGER" property="sceneRow" />
+    <result column="product_num" jdbcType="VARCHAR" property="productNum" />
+    <result column="checksum" jdbcType="VARCHAR" property="checksum" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="progress" jdbcType="INTEGER" property="progress" />
+    <result column="result" jdbcType="VARCHAR" property="result" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, batch_id, satellite_abbr, sensor_abbr, file_name, origin_path, store_path, outline_path, 
+    store_space, receive_time, x_top_left, y_top_left, x_top_right, y_top_right, x_bottom_right, 
+    y_bottom_right, x_bottom_left, y_bottom_left, geom, cloud, resolution_max, orbit_num, 
+    scene_path, scene_row, product_num, checksum, status, start_time, end_time, progress, 
+    result
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from image_package
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from image_package
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.tiantu.data.server.pushquery.entity.imagePackage">
+    insert into image_package (id, batch_id, satellite_abbr, 
+      sensor_abbr, file_name, origin_path, 
+      store_path, outline_path, store_space, 
+      receive_time, x_top_left, y_top_left, 
+      x_top_right, y_top_right, x_bottom_right, 
+      y_bottom_right, x_bottom_left, y_bottom_left, 
+      geom, cloud, resolution_max, 
+      orbit_num, scene_path, scene_row, 
+      product_num, checksum, status, 
+      start_time, end_time, progress, 
+      result)
+    values (#{id,jdbcType=VARCHAR}, #{batchId,jdbcType=VARCHAR}, #{satelliteAbbr,jdbcType=VARCHAR}, 
+      #{sensorAbbr,jdbcType=VARCHAR}, #{fileName,jdbcType=VARCHAR}, #{originPath,jdbcType=VARCHAR}, 
+      #{storePath,jdbcType=VARCHAR}, #{outlinePath,jdbcType=VARCHAR}, #{storeSpace,jdbcType=DOUBLE}, 
+      #{receiveTime,jdbcType=TIMESTAMP}, #{xTopLeft,jdbcType=DOUBLE}, #{yTopLeft,jdbcType=DOUBLE}, 
+      #{xTopRight,jdbcType=DOUBLE}, #{yTopRight,jdbcType=DOUBLE}, #{xBottomRight,jdbcType=DOUBLE}, 
+      #{yBottomRight,jdbcType=DOUBLE}, #{xBottomLeft,jdbcType=DOUBLE}, #{yBottomLeft,jdbcType=DOUBLE}, 
+      #{geom,jdbcType=OTHER}, #{cloud,jdbcType=REAL}, #{resolutionMax,jdbcType=REAL}, 
+      #{orbitNum,jdbcType=INTEGER}, #{scenePath,jdbcType=INTEGER}, #{sceneRow,jdbcType=INTEGER}, 
+      #{productNum,jdbcType=VARCHAR}, #{checksum,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{progress,jdbcType=INTEGER}, 
+      #{result,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tiantu.data.server.pushquery.entity.imagePackage">
+    insert into image_package
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="batchId != null">
+        batch_id,
+      </if>
+      <if test="satelliteAbbr != null">
+        satellite_abbr,
+      </if>
+      <if test="sensorAbbr != null">
+        sensor_abbr,
+      </if>
+      <if test="fileName != null">
+        file_name,
+      </if>
+      <if test="originPath != null">
+        origin_path,
+      </if>
+      <if test="storePath != null">
+        store_path,
+      </if>
+      <if test="outlinePath != null">
+        outline_path,
+      </if>
+      <if test="storeSpace != null">
+        store_space,
+      </if>
+      <if test="receiveTime != null">
+        receive_time,
+      </if>
+      <if test="xTopLeft != null">
+        x_top_left,
+      </if>
+      <if test="yTopLeft != null">
+        y_top_left,
+      </if>
+      <if test="xTopRight != null">
+        x_top_right,
+      </if>
+      <if test="yTopRight != null">
+        y_top_right,
+      </if>
+      <if test="xBottomRight != null">
+        x_bottom_right,
+      </if>
+      <if test="yBottomRight != null">
+        y_bottom_right,
+      </if>
+      <if test="xBottomLeft != null">
+        x_bottom_left,
+      </if>
+      <if test="yBottomLeft != null">
+        y_bottom_left,
+      </if>
+      <if test="geom != null">
+        geom,
+      </if>
+      <if test="cloud != null">
+        cloud,
+      </if>
+      <if test="resolutionMax != null">
+        resolution_max,
+      </if>
+      <if test="orbitNum != null">
+        orbit_num,
+      </if>
+      <if test="scenePath != null">
+        scene_path,
+      </if>
+      <if test="sceneRow != null">
+        scene_row,
+      </if>
+      <if test="productNum != null">
+        product_num,
+      </if>
+      <if test="checksum != null">
+        checksum,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="endTime != null">
+        end_time,
+      </if>
+      <if test="progress != null">
+        progress,
+      </if>
+      <if test="result != null">
+        result,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="batchId != null">
+        #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="satelliteAbbr != null">
+        #{satelliteAbbr,jdbcType=VARCHAR},
+      </if>
+      <if test="sensorAbbr != null">
+        #{sensorAbbr,jdbcType=VARCHAR},
+      </if>
+      <if test="fileName != null">
+        #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="originPath != null">
+        #{originPath,jdbcType=VARCHAR},
+      </if>
+      <if test="storePath != null">
+        #{storePath,jdbcType=VARCHAR},
+      </if>
+      <if test="outlinePath != null">
+        #{outlinePath,jdbcType=VARCHAR},
+      </if>
+      <if test="storeSpace != null">
+        #{storeSpace,jdbcType=DOUBLE},
+      </if>
+      <if test="receiveTime != null">
+        #{receiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="xTopLeft != null">
+        #{xTopLeft,jdbcType=DOUBLE},
+      </if>
+      <if test="yTopLeft != null">
+        #{yTopLeft,jdbcType=DOUBLE},
+      </if>
+      <if test="xTopRight != null">
+        #{xTopRight,jdbcType=DOUBLE},
+      </if>
+      <if test="yTopRight != null">
+        #{yTopRight,jdbcType=DOUBLE},
+      </if>
+      <if test="xBottomRight != null">
+        #{xBottomRight,jdbcType=DOUBLE},
+      </if>
+      <if test="yBottomRight != null">
+        #{yBottomRight,jdbcType=DOUBLE},
+      </if>
+      <if test="xBottomLeft != null">
+        #{xBottomLeft,jdbcType=DOUBLE},
+      </if>
+      <if test="yBottomLeft != null">
+        #{yBottomLeft,jdbcType=DOUBLE},
+      </if>
+      <if test="geom != null">
+        #{geom,jdbcType=OTHER},
+      </if>
+      <if test="cloud != null">
+        #{cloud,jdbcType=REAL},
+      </if>
+      <if test="resolutionMax != null">
+        #{resolutionMax,jdbcType=REAL},
+      </if>
+      <if test="orbitNum != null">
+        #{orbitNum,jdbcType=INTEGER},
+      </if>
+      <if test="scenePath != null">
+        #{scenePath,jdbcType=INTEGER},
+      </if>
+      <if test="sceneRow != null">
+        #{sceneRow,jdbcType=INTEGER},
+      </if>
+      <if test="productNum != null">
+        #{productNum,jdbcType=VARCHAR},
+      </if>
+      <if test="checksum != null">
+        #{checksum,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="progress != null">
+        #{progress,jdbcType=INTEGER},
+      </if>
+      <if test="result != null">
+        #{result,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tiantu.data.server.pushquery.entity.imagePackage">
+    update image_package
+    <set>
+      <if test="batchId != null">
+        batch_id = #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="satelliteAbbr != null">
+        satellite_abbr = #{satelliteAbbr,jdbcType=VARCHAR},
+      </if>
+      <if test="sensorAbbr != null">
+        sensor_abbr = #{sensorAbbr,jdbcType=VARCHAR},
+      </if>
+      <if test="fileName != null">
+        file_name = #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="originPath != null">
+        origin_path = #{originPath,jdbcType=VARCHAR},
+      </if>
+      <if test="storePath != null">
+        store_path = #{storePath,jdbcType=VARCHAR},
+      </if>
+      <if test="outlinePath != null">
+        outline_path = #{outlinePath,jdbcType=VARCHAR},
+      </if>
+      <if test="storeSpace != null">
+        store_space = #{storeSpace,jdbcType=DOUBLE},
+      </if>
+      <if test="receiveTime != null">
+        receive_time = #{receiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="xTopLeft != null">
+        x_top_left = #{xTopLeft,jdbcType=DOUBLE},
+      </if>
+      <if test="yTopLeft != null">
+        y_top_left = #{yTopLeft,jdbcType=DOUBLE},
+      </if>
+      <if test="xTopRight != null">
+        x_top_right = #{xTopRight,jdbcType=DOUBLE},
+      </if>
+      <if test="yTopRight != null">
+        y_top_right = #{yTopRight,jdbcType=DOUBLE},
+      </if>
+      <if test="xBottomRight != null">
+        x_bottom_right = #{xBottomRight,jdbcType=DOUBLE},
+      </if>
+      <if test="yBottomRight != null">
+        y_bottom_right = #{yBottomRight,jdbcType=DOUBLE},
+      </if>
+      <if test="xBottomLeft != null">
+        x_bottom_left = #{xBottomLeft,jdbcType=DOUBLE},
+      </if>
+      <if test="yBottomLeft != null">
+        y_bottom_left = #{yBottomLeft,jdbcType=DOUBLE},
+      </if>
+      <if test="geom != null">
+        geom = #{geom,jdbcType=OTHER},
+      </if>
+      <if test="cloud != null">
+        cloud = #{cloud,jdbcType=REAL},
+      </if>
+      <if test="resolutionMax != null">
+        resolution_max = #{resolutionMax,jdbcType=REAL},
+      </if>
+      <if test="orbitNum != null">
+        orbit_num = #{orbitNum,jdbcType=INTEGER},
+      </if>
+      <if test="scenePath != null">
+        scene_path = #{scenePath,jdbcType=INTEGER},
+      </if>
+      <if test="sceneRow != null">
+        scene_row = #{sceneRow,jdbcType=INTEGER},
+      </if>
+      <if test="productNum != null">
+        product_num = #{productNum,jdbcType=VARCHAR},
+      </if>
+      <if test="checksum != null">
+        checksum = #{checksum,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="progress != null">
+        progress = #{progress,jdbcType=INTEGER},
+      </if>
+      <if test="result != null">
+        result = #{result,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tiantu.data.server.pushquery.entity.imagePackage">
+    update image_package
+    set batch_id = #{batchId,jdbcType=VARCHAR},
+      satellite_abbr = #{satelliteAbbr,jdbcType=VARCHAR},
+      sensor_abbr = #{sensorAbbr,jdbcType=VARCHAR},
+      file_name = #{fileName,jdbcType=VARCHAR},
+      origin_path = #{originPath,jdbcType=VARCHAR},
+      store_path = #{storePath,jdbcType=VARCHAR},
+      outline_path = #{outlinePath,jdbcType=VARCHAR},
+      store_space = #{storeSpace,jdbcType=DOUBLE},
+      receive_time = #{receiveTime,jdbcType=TIMESTAMP},
+      x_top_left = #{xTopLeft,jdbcType=DOUBLE},
+      y_top_left = #{yTopLeft,jdbcType=DOUBLE},
+      x_top_right = #{xTopRight,jdbcType=DOUBLE},
+      y_top_right = #{yTopRight,jdbcType=DOUBLE},
+      x_bottom_right = #{xBottomRight,jdbcType=DOUBLE},
+      y_bottom_right = #{yBottomRight,jdbcType=DOUBLE},
+      x_bottom_left = #{xBottomLeft,jdbcType=DOUBLE},
+      y_bottom_left = #{yBottomLeft,jdbcType=DOUBLE},
+      geom = #{geom,jdbcType=OTHER},
+      cloud = #{cloud,jdbcType=REAL},
+      resolution_max = #{resolutionMax,jdbcType=REAL},
+      orbit_num = #{orbitNum,jdbcType=INTEGER},
+      scene_path = #{scenePath,jdbcType=INTEGER},
+      scene_row = #{sceneRow,jdbcType=INTEGER},
+      product_num = #{productNum,jdbcType=VARCHAR},
+      checksum = #{checksum,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      progress = #{progress,jdbcType=INTEGER},
+      result = #{result,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+
+
+  
+</mapper>

@@ -1,4 +1,4 @@
-# application.yaml
+# 2application.yaml
 server:
   port: 9099
   address: 0.0.0.0
@@ -13,53 +13,76 @@ server:
     backgroundProcessorDelay: 30 # secs
 
 # Spring Configuration
-#spring:
-  # MySQL Connect config
-  #datasource:
-    #type: org.apache.commons.dbcp.BasicDataSource
-    #driver-class-name: org.postgresql.Driver
-    #url: jdbc:postgresql://localhost:5432/mytest
-    #username: postgres
-   # password: 123456
-  #application:
-   # name: manage
-
-
-
 spring:
-  shardingsphere:
-    name: master
-    master:
-      datasource:
-        type: org.apache.commons.dbcp.BasicDataSource
-        driverClassName: org.postgresql.Driver
-        url: jdbc:postgresql://localhost:5432/mytest
-        username: postgres
-        password: 123456
+  # MySQL Connect config
+  datasource:
+    #type: com.alibaba.druid.pool.DruidDataSource
+    type: org.apache.commons.dbcp2.BasicDataSource
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/mytest
+    username: postgres
+    password: 123456
+  application:
+    name: manage
+  redis:
+    host: 192.168.1.106
+    port: 6379
+    password: root
+    pool:
+      max-active: 200
+      max-wait: -1
+      max-idle: 10
+      min-idle: 0
+    timeout: 1000
 
-      encrypt:
-        encryptors:
-          encryptor_aes:
-            type: aes
-            props:
-              aes.key.value: 2019
-        tables:
-          user_info:
-            columns:
-              password:
-                cipherColumn: password
-                encryptor: encryptor_aes
-              idcard:
-                cipherColumn: idcard
-                encryptor: encryptor_aes
-        props:
-          sql:
-            show: true
-          query:
-            with:
-              cipher:
-                column: true
 
+# 线程池
+task:
+  pool:
+    corePoolSize: 10
+    maxPoolSize: 20
+    keepAliveSeconds: 60
+    queueCapacity: 200
+
+
+
+#spring:
+#  shardingsphere:
+#    dataSource:
+#      name: ds
+#      ds:
+#        type: org.apache.commons.dbcp2.BasicDataSource
+#        driverClassName: org.postgresql.Driver
+#        url: jdbc:postgresql://172.16.1.32:5432/postgres
+#        username: postgres
+#        password: password
+#    props:
+#        sql.show: true
+#        #query.with.cipher.column: true #是否使用密文列查询
+#    encrypt:
+#      encryptors:
+#        aes_encryptor:
+#          type: aes
+#          props:
+#            aes.key.value: 123456abc
+#      tables:
+#        user_info:
+#          columns:
+#            idcard:
+#              #plainColumn: icd
+#              cipherColumn: idcard
+#              encryptor: aes_encryptor
+  #配置rabbitMq服务器
+  rabbitmq:
+    host: 192.168.1.6
+    port: 5672
+    username: guest
+    password: guest
 
 mybatis:
   mapper-locations: classpath:mapping/*.xml
+
+# 设置打印SQL语句
+logging:
+  level:
+    com.ticy.manage.dao.UserInfoMapper: DEBUG
