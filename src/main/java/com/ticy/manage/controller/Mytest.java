@@ -42,6 +42,8 @@ public class Mytest {
         return new Result("1001", "测试成功", "西安真美丽");
     }
 
+    
+    
 
     @PostMapping("/uploadtest")
     public Result mytestUpload(@RequestParam("uploadFile") MultipartFile file) {
